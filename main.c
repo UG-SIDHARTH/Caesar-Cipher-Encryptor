@@ -11,7 +11,9 @@
  * @param shift The numeric key indicating how many positions to shift letters.
  */
 void encrypt(char *text, int shift) {
-    // TODO: Issue #1 & #2 - Implement ASCII math and alphabet wrap-around here.
+    for (; *text; text++)
+        if (*text >= 'A' && *text <= 'Z') *text = 'A' + (*text - 'A' + (shift % 26 + 26)) % 26;
+        else if (*text >= 'a' && *text <= 'z') *text = 'a' + (*text - 'a' + (shift % 26 + 26)) % 26;
 }
 
 int main(void) {
@@ -33,7 +35,7 @@ int main(void) {
         return 1;
     }
 
-    // Call encryption function (currently empty)
+    // Call encryption function
     encrypt(text, shift);
 
     printf("Ciphertext: %s\n", text);
